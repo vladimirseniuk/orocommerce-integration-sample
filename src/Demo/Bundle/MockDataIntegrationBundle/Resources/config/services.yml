@@ -1,0 +1,8 @@
+services:
+    Demo\Bundle\MockDataIntegrationBundle\Channel\MockDataChannel:
+        tags:
+            - { name: oro_integration.channel, type: demo_mock_data_channel }
+
+    Demo\Bundle\MockDataIntegrationBundle\Transport\MockDataTransport:
+        tags:
+            - { name: oro_integration.transport, type: demo_mock_data_transport, channel_type: demo_mock_data_channel }
