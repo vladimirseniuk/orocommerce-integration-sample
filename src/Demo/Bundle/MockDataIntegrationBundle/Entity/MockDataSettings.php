@@ -13,8 +13,35 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 class MockDataSettings extends Transport
 {
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mock_data_api_url", type="string", length=255, nullable=true)
+     */
+    private $apiUrl = 'http://localhost:8080';
+
     /** @var ParameterBag */
     private $settingsBag;
+
+    /**
+     * @return string
+     */
+    public function getApiUrl()
+    {
+        return $this->apiUrl;
+    }
+
+    /**
+     * @param string $apiUrl
+     *
+     * @return MockDataSettings
+     */
+    public function setApiUrl($apiUrl)
+    {
+        $this->apiUrl = $apiUrl;
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
@@ -22,7 +49,9 @@ class MockDataSettings extends Transport
     public function getSettingsBag()
     {
         if (null === $this->settingsBag) {
-            $this->settingsBag = new ParameterBag();
+            $this->settingsBag = new ParameterBag([
+                'api_url' => $this->getApiUrl()
+            ]);
         }
 
         return $this->settingsBag;

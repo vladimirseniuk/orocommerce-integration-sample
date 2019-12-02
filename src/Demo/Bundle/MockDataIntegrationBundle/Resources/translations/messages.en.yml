@@ -1,4 +1,9 @@
+oro.catalog.category.mock_data_id.label: Mock Data ID
 demo:
     mock_data_integration:
         channel_type.label: Mock Data Integration
-        transport.label: Mock Data Transport
+        transport:
+            label: Mock Data Transport
+            api_url.label: API Url
+        connector:
+            category.label: Category Connector

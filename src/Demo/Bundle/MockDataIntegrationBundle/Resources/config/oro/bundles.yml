@@ -1,2 +1,2 @@
 bundles:
-     - { name: Demo\Bundle\MockDataIntegrationBundle\DemoMockDataIntegrationBundle }
+     - { name: Demo\Bundle\MockDataIntegrationBundle\DemoMockDataIntegrationBundle, priority: 1000 }
