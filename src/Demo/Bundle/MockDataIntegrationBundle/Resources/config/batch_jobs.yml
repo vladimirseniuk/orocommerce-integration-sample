@@ -1,0 +1,14 @@
+connector:
+    name: oro_importexport
+    jobs:
+        mock_data_import_categories:
+            title: "Import categories from mock data JSON server"
+            type: import
+            steps:
+                import:
+                    title: import
+                    class: Oro\Bundle\BatchBundle\Step\ItemStep
+                    services:
+                        reader: Demo\Bundle\MockDataIntegrationBundle\Connector\CategoryConnector
+                        processor: oro_importexport.processor.import_delegate
+                        writer: oro_catalog.importexport.writer.category

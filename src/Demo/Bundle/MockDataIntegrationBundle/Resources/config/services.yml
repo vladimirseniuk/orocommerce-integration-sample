@@ -4,5 +4,14 @@ services:
             - { name: oro_integration.channel, type: demo_mock_data_channel }
 
     Demo\Bundle\MockDataIntegrationBundle\Transport\MockDataTransport:
+        parent: oro_integration.transport.rest.abstract_transport
         tags:
             - { name: oro_integration.transport, type: demo_mock_data_transport, channel_type: demo_mock_data_channel }
+
+    Demo\Bundle\MockDataIntegrationBundle\Connector\CategoryConnector:
+        arguments:
+            - "@oro_importexport.context_registry"
+            - "@oro_integration.logger.strategy"
+            - "@oro_integration.provider.connector_context_mediator"
+        tags:
+            - { name: oro_integration.connector, type: category, channel_type: demo_mock_data_channel }
