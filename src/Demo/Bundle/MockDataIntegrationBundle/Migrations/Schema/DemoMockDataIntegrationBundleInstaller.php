@@ -25,15 +25,16 @@ class DemoMockDataIntegrationBundleInstaller implements Installation
     {
         $this->addTransportColumns($schema);
         $this->addMockDataIdToCategory($schema);
+        $this->configureProductIdentity($schema);
     }
 
     /**
      * @param Schema $schema
      */
-    public function addTransportColumns(Schema $schema)
+    private function addTransportColumns(Schema $schema)
     {
-        $transportTable = $schema->getTable('oro_integration_transport');
-        $transportTable->addColumn('mock_data_api_url', 'string', ['notnull' => false]);
+        $table = $schema->getTable('oro_integration_transport');
+        $table->addColumn('mock_data_api_url', 'string', ['notnull' => false]);
     }
 
     /**
@@ -41,9 +42,9 @@ class DemoMockDataIntegrationBundleInstaller implements Installation
      */
     private function addMockDataIdToCategory(Schema $schema)
     {
-        $userTable = $schema->getTable('oro_catalog_category');
-        $userTable->changeColumn('id', ['oro_options' => ['importexport' => ['identity' => false]]]);
-        $userTable->addColumn('mockDataId', 'integer', [
+        $table = $schema->getTable('oro_catalog_category');
+        $table->changeColumn('id', ['oro_options' => ['importexport' => ['identity' => false]]]);
+        $table->addColumn('mockDataId', 'integer', [
             'notnull' => false,
             'oro_options' => [
                 'extend' => ['owner' => ExtendScope::OWNER_CUSTOM],
@@ -52,5 +53,14 @@ class DemoMockDataIntegrationBundleInstaller implements Installation
                 'importexport' => ['excluded' => false, 'identity' => true],
             ]
         ]);
+    }
+
+    /**
+     * @param Schema $schema
+     */
+    private function configureProductIdentity(Schema $schema)
+    {
+        $table = $schema->getTable('oro_product');
+        $table->changeColumn('id', ['oro_options' => ['importexport' => ['identity' => false]]]);
     }
 }

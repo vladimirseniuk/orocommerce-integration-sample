@@ -24,3 +24,17 @@ connector:
                         reader: oro_integration.reader.entity.by_id
                         processor: oro_importexport.processor.export_delegate
                         writer: Demo\Bundle\MockDataIntegrationBundle\ImportExport\Writer\CategoryExportWriter
+
+        mock_data_import_products:
+            title: "Import products from mock data JSON server"
+            type: import
+            steps:
+                import:
+                    title: import
+                    class: Oro\Bundle\BatchBundle\Step\ItemStep
+                    services:
+                        reader: Demo\Bundle\MockDataIntegrationBundle\Connector\ProductConnector
+                        processor: oro_importexport.processor.import_delegate
+                        writer: oro_importexport.writer.entity
+                    parameters:
+                        batch_size: 1000

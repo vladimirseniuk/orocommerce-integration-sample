@@ -16,6 +16,14 @@ services:
         tags:
             - { name: oro_integration.connector, type: category, channel_type: demo_mock_data_channel }
 
+    Demo\Bundle\MockDataIntegrationBundle\Connector\ProductConnector:
+        arguments:
+            - "@oro_importexport.context_registry"
+            - "@oro_integration.logger.strategy"
+            - "@oro_integration.provider.connector_context_mediator"
+        tags:
+            - { name: oro_integration.connector, type: product, channel_type: demo_mock_data_channel }
+
     Demo\Bundle\MockDataIntegrationBundle\EventListener\CategoryChangeListener:
         arguments:
             - "@oro_integration.sync_scheduler"

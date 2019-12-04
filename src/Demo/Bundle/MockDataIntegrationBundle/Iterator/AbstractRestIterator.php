@@ -25,7 +25,7 @@ abstract class AbstractRestIterator extends BaseAbstractRestIterator
      */
     protected function loadPage(RestClientInterface $client)
     {
-        $result = $client->getJSON($this->getResource(), ['_page' => $this->page, '_limit' => self::PAGE_LIMIT]);
+        $result = $client->getJSON($this->getResource(), $this->getHeaders());
 
         $this->page++;
 
@@ -38,5 +38,13 @@ abstract class AbstractRestIterator extends BaseAbstractRestIterator
     protected function getTotalCountFromPageData(array $data, $previousValue)
     {
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getHeaders()
+    {
+        return ['_page' => $this->page, '_limit' => self::PAGE_LIMIT];
     }
 }

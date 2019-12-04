@@ -5,6 +5,7 @@ namespace Demo\Bundle\MockDataIntegrationBundle\Transport;
 use Demo\Bundle\MockDataIntegrationBundle\Entity\MockDataSettings;
 use Demo\Bundle\MockDataIntegrationBundle\Form\Type\MockDataSettingsType;
 use Demo\Bundle\MockDataIntegrationBundle\Iterator\CategoryRestIterator;
+use Demo\Bundle\MockDataIntegrationBundle\Iterator\ProductRestIterator;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Transport\AbstractRestTransport;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -59,5 +60,13 @@ class MockDataTransport extends AbstractRestTransport
     public function getCategories()
     {
         return new CategoryRestIterator($this->getClient());
+    }
+
+    /**
+     * @return ProductRestIterator
+     */
+    public function getProducts()
+    {
+        return new ProductRestIterator($this->getClient());
     }
 }

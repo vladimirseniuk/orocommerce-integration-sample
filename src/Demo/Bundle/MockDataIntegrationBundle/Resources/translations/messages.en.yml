@@ -7,3 +7,4 @@ demo:
             api_url.label: API Url
         connector:
             category.label: Category Connector
+            product.label: Product Connector
