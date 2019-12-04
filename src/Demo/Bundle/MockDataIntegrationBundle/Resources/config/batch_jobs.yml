@@ -12,3 +12,15 @@ connector:
                         reader: Demo\Bundle\MockDataIntegrationBundle\Connector\CategoryConnector
                         processor: oro_importexport.processor.import_delegate
                         writer: oro_catalog.importexport.writer.category
+
+        mock_data_export_categories:
+            title: "Export categories to mock data JSON server"
+            type: export
+            steps:
+                export:
+                    title: export
+                    class: Oro\Bundle\BatchBundle\Step\ItemStep
+                    services:
+                        reader: oro_integration.reader.entity.by_id
+                        processor: oro_importexport.processor.export_delegate
+                        writer: Demo\Bundle\MockDataIntegrationBundle\ImportExport\Writer\CategoryExportWriter

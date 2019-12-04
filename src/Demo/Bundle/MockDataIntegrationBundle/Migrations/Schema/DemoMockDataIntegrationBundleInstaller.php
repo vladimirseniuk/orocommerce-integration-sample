@@ -34,13 +34,6 @@ class DemoMockDataIntegrationBundleInstaller implements Installation
     {
         $transportTable = $schema->getTable('oro_integration_transport');
         $transportTable->addColumn('mock_data_api_url', 'string', ['notnull' => false]);
-        $transportTable->addColumn('ldap_port', 'integer', ['notnull' => false]);
-        $transportTable->addColumn('ldap_encryption', 'string', ['notnull' => false]);
-        $transportTable->addColumn('ldap_base_dn', 'string', ['notnull' => false]);
-        $transportTable->addColumn('ldap_username', 'string', ['notnull' => false]);
-        $transportTable->addColumn('ldap_password', 'string', ['notnull' => false]);
-        $transportTable->addColumn('ldap_account_domain', 'string', ['notnull' => false]);
-        $transportTable->addColumn('ldap_account_domain_short', 'string', ['notnull' => false]);
     }
 
     /**

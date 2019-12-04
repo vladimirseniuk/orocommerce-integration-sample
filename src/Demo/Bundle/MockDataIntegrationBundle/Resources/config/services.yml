@@ -15,3 +15,18 @@ services:
             - "@oro_integration.provider.connector_context_mediator"
         tags:
             - { name: oro_integration.connector, type: category, channel_type: demo_mock_data_channel }
+
+    Demo\Bundle\MockDataIntegrationBundle\EventListener\CategoryChangeListener:
+        arguments:
+            - "@oro_integration.sync_scheduler"
+            - "@oro_entity.doctrine_helper"
+        tags:
+            - { name: doctrine.event_listener, event: onFlush }
+            - { name: doctrine.event_listener, event: postFlush }
+
+    Demo\Bundle\MockDataIntegrationBundle\ImportExport\Writer\CategoryExportWriter:
+        calls:
+            - [setContextRegistry, ["@oro_importexport.context_registry"]]
+            - [setDoctrineHelper, ["@oro_entity.doctrine_helper"]]
+            - [setTransport, ['@Demo\Bundle\MockDataIntegrationBundle\Transport\MockDataTransport']]
+            - [setLogger, ["@oro_integration.logger.strategy"]]
